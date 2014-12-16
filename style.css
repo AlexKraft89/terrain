@@ -1,0 +1,201 @@
+
+.widowdialog
+{
+	position: absolute;
+	top: 10px;
+	left: 235px;
+	z-index: 10;
+	height: 100px;
+	width: 800px;
+}
+.addnewbody {display: inline-block; }
+.addnewelementmain img {
+	cursor: pointer;
+}
+.addnewelementmain {
+	height: 32px;
+
+	z-index: 1;
+	position: absolute;
+	bottom: 5px;
+	left: 5px;
+	overflow: hidden;
+	border: 1px solid #FFF;
+	border-radius: 5px;
+}
+.window { 
+z-index: 20;
+background-color: rgba(0, 0, 0, 0.45);
+box-shadow: 0px 0px 10px #0F0F0F;
+border: 1px groove rgba(156, 156, 156, 0.92);
+border-radius: 3px;
+width: 200px;
+text-align: left;
+font-weight: normal;
+min-height: 50px;
+color: #FFF;
+overflow: hidden;
+float: left;
+position: relative;
+font-size: 12px;
+}
+
+
+.wheader{
+	background: #45484D;
+	background: -moz-linear-gradient(top, #45484d 0%, #000000 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#45484D), color-stop(100%,#000));
+	background: -webkit-linear-gradient(top, #45484D 0%,#000 100%);
+	background: -o-linear-gradient(top, #45484d 0%,#000000 100%);
+	background: -ms-linear-gradient(top, #45484d 0%,#000000 100%);
+	background: linear-gradient(to bottom, #45484D 0%,#000 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=0 );
+	height: 20px;
+	font-size: 15px;
+	text-align: center;
+	cursor: pointer;
+}
+
+.windowlist {
+padding-left: 5px;
+padding-top: 5px;
+padding-bottom: 5px;
+}
+
+.windhide {
+	width: 15px;
+	height: 15px;
+	background-color: #9DAEBB;
+	display: block;
+	position: absolute;
+	right: 35px;
+	top: 0px;
+	border-radius: 50px;
+	margin: 2px;
+
+}
+
+.widowmove {
+
+	width: 15px;
+	height: 15px;
+	background-color: #FFF;
+	display: block;
+	position: absolute;
+	right: 17px;
+	top: 0px;
+	border-radius: 50px;
+	margin: 2px;
+
+}
+
+.widowclose {
+	width: 15px;
+	height: 15px;
+	background-color: #F00;
+	display: block;
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	border-radius: 50px;
+	margin: 2px;
+}
+
+.allobjectWindow {
+	position: absolute;
+	z-index: 20;
+	width: 200px;
+	min-height: 300px;
+	top: 10px;
+	left: 10px;
+	background-color: rgba(0, 0, 0, 0.45);
+	box-shadow: 0px 0px 10px #0F0F0F;
+	border: 1px groove rgba(156, 156, 156, 0.92);
+	color: #FFF;
+	text-align: left;
+}
+.allobectbody {
+overflow-y: scroll;
+height: 260px;
+border-bottom: 1px solid #9C9C9C;
+}
+
+.itemObjectScene {
+	font-weight: normal;
+	padding: 3px;
+	cursor: pointer;
+}
+.itemObjectScene:hover {
+	background-color: rgba(255, 255, 255, 0.46);
+	color: #000;
+}
+
+.allobectbodybutton img {
+	cursor: pointer;
+}
+.hiddendopelement {
+position: absolute;
+height: 24px;
+width: 201px;
+margin-top: -24px;
+background-color: rgba(85, 85, 85, 0.7);
+border-bottom-left-radius: 1px;
+border-bottom-right-radius: 1px;
+}
+
+.selected {
+	background-color: rgba(255, 255, 255, 0.46);
+	color: #000;
+}
+
+.dopmenufotobject {
+position: absolute;
+z-index: 10;
+top: 320px;
+left: 10px;
+width: 200px;
+height: 30px;
+text-align: left;
+
+}
+
+.dopmenufotobject img {
+cursor: pointer;
+}
+.ModalWindow {
+width: 200px;
+z-index: 10;
+position: absolute;
+top: 200px;
+left: 50%;
+margin-left: -100px;
+background-color: rgba(0, 0, 0, 0.45);
+box-shadow: 0px 0px 10px #0F0F0F;
+border: 1px groove rgba(156, 156, 156, 0.92);
+color: #FFF;
+text-align: center;
+}
+.ModalWindow >.mwheader{
+		background: #45484D;
+		background: -moz-linear-gradient(top, #45484d 0%, #000000 100%);
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#45484D), color-stop(100%,#000));
+		background: -webkit-linear-gradient(top, #45484D 0%,#000 100%);
+		background: -o-linear-gradient(top, #45484d 0%,#000000 100%);
+		background: -ms-linear-gradient(top, #45484d 0%,#000000 100%);
+		background: linear-gradient(to bottom, #45484D 0%,#000 100%);
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=0 );
+		height: 20px;
+		font-size: 15px;
+		text-align: center;
+		cursor: pointer;
+}
+
+.ModalWindow > .mwbody {}
+.ModalWindow > .mwbody > div > input {
+width: 80px;
+margin-top: 1px;
+margin-bottom: 1px;
+font-size: 12px;
+}
+.ModalWindow > .mwbutton {}
+.ModalWindow >  .mwbutton button {}

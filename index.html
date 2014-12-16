@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>three.js webgl - orbit controls</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+			body {
+				color: #000;
+				font-family:Monospace;
+				font-size:13px;
+				text-align:center;
+				font-weight: bold;
+
+				background-color: #fff;
+				margin: 0px;
+						overflow: hidden;
+			}
+
+			#info {
+				color:#000;
+				position: absolute;
+				top: 0px; width: 100%;
+				padding: 5px;
+
+			}
+
+			a {
+				color: red;
+			}
+		</style>
+
+		<link rel="stylesheet" href="/style.css">
+		<script src="/lib/three.min.js"></script>
+		<script src="/lib/map.js"></script>
+		<script src="/lib/OrbitControls.js"></script>
+		<script src="/lib/jquery-2.0.0.min.js"></script>
+		<script src="/lib/dnd.js"></script>
+		<script src="/lib/modul.js"></script>
+		<script src="/lib/keyboard.js"></script>
+		<script src="/lib/gui.js"></script>
+		<script src="/lib/dat.gui.js"></script>
+
+
+
+<script id="vertexShader" type="x-shader/x-vertex">
+uniform sampler2D bumpTexture;
+uniform float bumpScale;
+varying float v2Amount;
+varying float vAmount;
+varying vec2 vUV;
+
+
+void main() 
+{ 
+	vUV = uv;
+	vec4 bumpData = texture2D( bumpTexture, uv );
+	
+	vAmount = bumpData.r; // assuming map is grayscale it doesn't matter if you use r, g, or b.
+	
+	// move the position along the normal
+
+   // vec3 newPosition = position + normal * bumpScale * v2Amount;
+
+
+    //vec3 vA = position / (normal * bumpScale) ;
+	//vAmount = vA.y;
+
+	gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+
+}
+</script>
+
+<!-- fragment shader a.k.a. pixel shader -->
+<script id="fragmentShader" type="x-shader/x-vertex"> 
+uniform sampler2D oceanTexture;
+uniform sampler2D sandyTexture;
+uniform sampler2D grassTexture;
+uniform sampler2D rockyTexture;
+uniform sampler2D snowyTexture;
+varying vec2 vUV;
+varying vec3 position;
+varying float vAmount;
+
+void main() 
+{
+	vec4 water = (smoothstep(0.01, 0.25, vAmount) - smoothstep(0.24, 0.26, vAmount)) * texture2D( oceanTexture, vUV * 10.0 );
+	vec4 sandy = (smoothstep(0.24, 0.27, vAmount) - smoothstep(0.28, 0.31, vAmount)) * texture2D( sandyTexture, vUV * 10.0 );
+	vec4 grass = (smoothstep(0.28, 0.32, vAmount) - smoothstep(0.35, 0.40, vAmount)) * texture2D( grassTexture, vUV * 20.0 );
+	vec4 rocky = (smoothstep(0.30, 0.50, vAmount) - smoothstep(0.40, 0.70, vAmount)) * texture2D( rockyTexture, vUV * 20.0 );
+	vec4 snowy = (smoothstep(0.50, 0.65, vAmount))                                   * texture2D( snowyTexture, vUV * 10.0 );
+	gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0) + water + sandy + grass + rocky + snowy; //, 1.0);
+}  
+</script>
+
+
+
+
+
+	</head>
+
+	<body>
+		<div id="container"></div>
+		<script>
+		var customUniforms
+			window.movecamera = false;
+ 			window.keyboard = new THREEx.KeyboardState();
+			var container, stats;
+
+			var camera, controls, scene, renderer;
+
+			init();
+			//render();
+
+
+			function init() {
+
+				camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 10000 );
+				camera.position.z = 500;
+
+				controls = new THREE.OrbitControls( camera );
+				controls.damping = 0.2;
+				//controls.addEventListener( 'change', render );
+
+				scene = new THREE.Scene();
+				//scene.fog = new THREE.FogExp2( 0xcccccc, 0.002 );
+
+				// world
+
+				// var geometry = new THREE.CylinderGeometry( 0, 10, 30, 4, 1 );
+				// var material =  new THREE.MeshLambertMaterial( { color:0xffffff, shading: THREE.FlatShading } );
+
+				// for ( var i = 0; i < 500; i ++ ) {
+
+				// 	var mesh = new THREE.Mesh( geometry, material );
+				// 	mesh.position.x = ( Math.random() - 0.5 ) * 1000;
+				// 	mesh.position.y = ( Math.random() - 0.5 ) * 1000;
+				// 	mesh.position.z = ( Math.random() - 0.5 ) * 1000;
+				// 	mesh.updateMatrix();
+				// 	mesh.matrixAutoUpdate = false;
+				// 	scene.add( mesh );
+
+				// }
+
+
+				// lights
+
+				// light = new THREE.DirectionalLight( 0xffffff );
+				// light.position.set( 1, 1, 1 );
+				// scene.add( light );
+
+				// light = new THREE.DirectionalLight( 0x002288 );
+				// light.position.set( -1, -1, -1 );
+				// scene.add( light );
+
+				// light = new THREE.AmbientLight( 0x222222 );
+				// scene.add( light );
+
+
+				// renderer
+
+				renderer = new THREE.WebGLRenderer( { antialias: true } );
+				renderer.setClearColor( 0xcccccc, 1 );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+				renderer.shadowMapType = THREE.PCFSoftShadowMap;
+				renderer.shadowMapEnabled = true;
+				//renderer.shadowMapCullFace = THREE.CullFaceBack;
+				//renderer.physicallyBasedShading = true;  
+
+				container = document.getElementById( 'container' );
+				container.appendChild( renderer.domElement );
+
+				WORLD = new World();
+
+				
+
+				//
+
+				window.addEventListener( 'resize', onWindowResize, false );
+
+
+				animate();
+
+			}
+
+			function onWindowResize() {
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+				render();
+
+			}
+
+			function animate() {
+
+				requestAnimationFrame(animate);
+				controls.update();
+				renderer.render( scene, camera );
+			}
+
+
+			// function render() {
+
+			// 	renderer.render( scene, camera );
+				
+
+			// }
+
+/////////////////////////////////////////////////
+
+	
+
+////////////////////////////////////////////////////////////////////////////
+
+MODUL.load("stamping");
+MODUL.load("elementcreator");
+
+// REDAKTOR = {
+
+// 	"ShowVertexPanel":function(){
+// 		MODUL.stopAll();
+// 		MODUL.start("stamping");
+// 	},
+// 	"ShowCreatPanel":function(){
+// 		MODUL.stopAll();
+// 		MODUL.start("elementcreator");
+
+// 	}
+
+
+
+// 	}
+
+$(function(){
+	GUI.init();
+
+// WINDOW.creat("inst",{"header":"Инструменты"});
+// WINDOW.addItem("inst","Создать",function(){
+// 		MODUL.stopAll();
+// 		MODUL.start("elementcreator");
+// });
+// WINDOW.addItem("inst","Выдавливатель",function(){
+// 		MODUL.stopAll();
+// 		MODUL.start("stamping");
+
+// });
+
+
+GUI.sceneObjectPanel.init();
+GUI.sceneObjectPanel.refresh(scene);
+
+
+
+
+});
+
+		</script>
+
+
+
+
+
+	</body>
+
+	<style type="text/css">
+
+	</style>
+</html>
+
