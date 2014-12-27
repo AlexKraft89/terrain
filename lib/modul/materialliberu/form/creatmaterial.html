@@ -1,0 +1,102 @@
+<style>
+.maincreatmaterial {
+	width: 400px;
+	height: 500px;
+	position: absolute;
+	z-index: 11;
+	background: rgba(0, 0, 0, 0.96);
+	top: 3%;
+	border: 1px solid #5D5D5D;
+	left: 50%;
+	margin-left: -200px;
+	color: #FFF;
+}
+.maincreatmaterial > .header{
+
+	background: #45484D;
+	background: -moz-linear-gradient(top, #45484d 0%, #000000 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#45484D), color-stop(100%,#000));
+	background: -webkit-linear-gradient(top, #45484D 0%,#000 100%);
+	background: -o-linear-gradient(top, #45484d 0%,#000000 100%);
+	background: -ms-linear-gradient(top, #45484d 0%,#000000 100%);
+	background: linear-gradient(to bottom, #45484D 0%,#000 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=0 );
+	height: 20px;
+	font-size: 15px;
+	text-align: center;
+	cursor: pointer;
+}
+.maincreatmaterial > .body{
+	height: 400px;
+}
+.maincreatmaterial > .body > .confing {
+	height: 60px;
+margin-top: 20px;
+}
+
+.maincreatmaterial > .body > .confing > input {
+	width: 94%;
+}
+.maincreatmaterial > .body > .confing > select {
+	width: 95%;
+}
+.maincreatmaterial > .body > .texturebody {
+
+	height: 350px;
+width: 380px;
+margin: 0 auto;
+background-color: #171717;
+padding: 10px 0px;
+overflow-y: scroll;
+}
+
+.maincreatmaterial > .body > .texturebody > .item {
+text-align: left;
+height: 50px;
+margin-top: 2px;
+margin-bottom: 2px;
+padding: 3px;
+border-bottom: 1px solid #727272;
+cursor: pointer;
+
+}
+
+.maincreatmaterial > .body > .texturebody > .item:hover { 
+background-color: #444343;
+}
+.maincreatmaterial > .body > .texturebody > .item > .img {
+
+	display: inline-block;
+}
+.maincreatmaterial > .body > .texturebody > .item > span {}
+
+.textselect {
+	background-color: #5A5A5A;
+}
+</style>
+<div class="maincreatmaterial">
+	<div class="header">Создание материала</div>
+	<div class="body">
+		<div class="confing">
+			<input type="text" placeholder="Название материала">
+			<select id="tipmaterial">
+				<option value="none">Выберите тип</option>
+				<option value="MeshBasicMaterial">MeshBasicMaterial</option>
+				<option value="MeshNormalMaterial">MeshNormalMaterial</option>
+				<option value="MeshPhongMaterial">MeshPhongMaterial</option>
+			</select>
+		</div>
+		<div class="texturebody" id="texturebodye">
+
+
+
+	
+
+
+		</div>
+		<div class="footer">
+			<div class="button">Выбрать</div>
+			<div class="button" id="closecreatmaterial">Закрыть</div>
+		</div>
+	</div>	
+</div>

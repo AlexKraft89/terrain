@@ -1,0 +1,59 @@
+<style>
+.materiallibery {
+	position: absolute;
+	z-index: 10;
+	width: 800px;
+	height: 600px;
+	background-color: rgba(0, 0, 0, 0.89);
+	top: 3%;
+	left: 50%;
+	margin-left: -400px;
+	border: 1px solid #000;
+	color: #fff;
+}
+.materiallibery > .header {
+	background: #45484D;
+	background: -moz-linear-gradient(top, #45484d 0%, #000000 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#45484D), color-stop(100%,#000));
+	background: -webkit-linear-gradient(top, #45484D 0%,#000 100%);
+	background: -o-linear-gradient(top, #45484d 0%,#000000 100%);
+	background: -ms-linear-gradient(top, #45484d 0%,#000000 100%);
+	background: linear-gradient(to bottom, #45484D 0%,#000 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=0 );
+	height: 20px;
+	font-size: 15px;
+	text-align: center;
+	cursor: pointer;
+}
+.materiallibery > .body {
+	width: 800px;
+	height: 540px;
+	border-bottom: 1px solid rgba(63, 59, 59, 0.41);
+}
+.materiallibery > .body > .leftrow {
+	height: 540px;
+	width: 50px;
+	border-right: 1px solid rgba(119, 119, 119, 0.41);
+}
+.materiallibery > .body > .leftrow > div { 
+	padding-top: 5px;
+cursor: pointer;
+}
+.materiallibery > .body > .rightrow {
+	height: 540px;
+	width: 750px;
+}
+</style>
+
+<div class="materiallibery">
+	<div class="header">Медиа галлерея</div>
+	<div class="body">
+		<div class="leftrow">
+			<div id="creatnewmaterial">
+				<img src="/lib/modul/materialliberu/form/img/plus.png">
+			</div>
+		</div>
+		<div class="rightrow"></div>
+		<div class="clear"></div>
+	</div>				    	
+</div>

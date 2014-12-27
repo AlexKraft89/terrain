@@ -1,4 +1,16 @@
+.clear {
+	clear: both;
+}
 
+.button{
+	border: 1px solid #FFF;
+display: inline-block;
+cursor: pointer;
+padding: 2px 20px;
+}
+.button:hover {
+background-color: #4D4D4D;
+}
 .widowdialog
 {
 	position: absolute;
