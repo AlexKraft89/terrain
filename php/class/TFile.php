@@ -14,6 +14,13 @@ class TFile {
 		    return $array;
 		}
 	}
+	static function saveFile($path,$name,$data,$r = 'x'){
+		if (file_put_contents($_SERVER['DOCUMENT_ROOT'].$path.$name.'.'.$r, $data)){
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
 ?>
 
