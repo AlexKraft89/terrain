@@ -1,0 +1,68 @@
+<style>
+.landscapeprop {
+	width: 206px;
+z-index: 10;
+position: absolute;
+top: 200px;
+left: 50%;
+margin-left: -100px;
+background-color: rgba(0, 0, 0, 0.45);
+box-shadow: 0px 0px 10px #0F0F0F;
+border: 1px groove rgba(156, 156, 156, 0.92);
+color: #FFF;
+}
+.landscapeprop > .header {
+	background: #45484D;
+background: -moz-linear-gradient(top, #45484d 0%, #000000 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#45484D), color-stop(100%,#000));
+background: -webkit-linear-gradient(top, #45484D 0%,#000 100%);
+background: -o-linear-gradient(top, #45484d 0%,#000000 100%);
+background: -ms-linear-gradient(top, #45484d 0%,#000000 100%);
+background: linear-gradient(to bottom, #45484D 0%,#000 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=0 );
+height: 20px;
+font-size: 15px;
+text-align: center;
+cursor: pointer;
+}
+.landscapeprop > .body {}
+.landscapeprop > .body > .item {
+	height: 25px;
+padding-left: 5px;
+padding-right: 5px;
+}
+.landscapeprop > .body > .item > input {
+width: 100px;
+float: right;
+}
+.landscapeprop > .body > .material {
+text-align: center;
+}
+.landscapeprop > .body > .material > .otb {
+	height: 60px;
+width: 190px;
+border: 1px solid #fff;
+display: inline-block;
+margin: 5px;
+cursor: pointer;
+}
+</style>
+
+<div class="landscapeprop">
+	<div class="header">Создать ландшафт</div>
+	<div class="body">
+		<div class="item"><b> Имя: </b> <input id="landscpe_name" type="text"></div>
+		<div class="item"><b> Ширина: </b> <input id="landscpe_width" type="text"></div>
+		<div class="item"><b> Высота: </b> <input id="landscpe_heigth" type="text"></div>
+		<div class="item"><b> Сигменты H: </b> <input id="landscpe_Hsegment" type="text"></div>
+		<div class="item"><b> Сигменты W: </b> <input id="landscpe_Wsegment" type="text"></div>
+		<div class="material">
+			<div class="otb" id="modulclicktoselmaterial"></div>
+			<input id="modulclicktoselmaterial_val" type="hidden">
+		</div>
+	</div>
+	<div>
+			<div class="button" id="savenewlandscape">Сохранить</div>
+			<div class="button" onclick="MODUL.stop('elementcreator');">Закрыть</div>
+	</div>
+</div>

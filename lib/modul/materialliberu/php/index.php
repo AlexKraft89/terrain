@@ -20,14 +20,21 @@ if ($_GET['action'] === "gettexture"){
 
 if ($_GET['action'] === "getmaterial"){
 	
-	$res1 = TFile::getFileToFloder($materialPath.'/MeshBasicMaterial/');
-	$res2= TFile::getFileToFloder($materialPath.'/MeshNormalMaterial/');
-	$res3 = TFile::getFileToFloder($materialPath.'/MeshPhongMaterial/');
+	$res1 = TFile::getFileToFloder($materialPath.'MeshBasicMaterial/');
+	$res2 = TFile::getFileToFloder($materialPath.'MeshNormalMaterial/');
+	$res3 = TFile::getFileToFloder($materialPath.'MeshPhongMaterial/');
+	$res4 = TFile::getFileToFloder($materialPath.'MeshLambertMaterial/');
+	
+
 	$res = array_merge($res1, $res2);
-	$r = array_merge($res, $res3);
+	$r2 = array_merge($res3, $res4);
+	$r = array_merge($res, $r2);
 	$material = array();
 	foreach($r as $url){
-		$material[] = json_decode(file_get_contents($_SERVER['DOCUMENT_ROOT'].$url));
+		$rFile = (array)json_decode(file_get_contents($_SERVER['DOCUMENT_ROOT'].$url));
+		$rFile['FILE'] = $url;
+
+		$material[] = $rFile;
 	}
 
 	print_r(json_encode($material));
@@ -47,7 +54,7 @@ if ($_GET['action'] === "savetexture"){
 							'blendSrc' => 204,
 							'blending' =>1,
 							'combine' => 0,
-							'depthTest' => false,
+							'depthTest' => true,
 							'depthWrite' => true,
 							'fog' => true,
 							'morphTargets' => false,
@@ -65,6 +72,8 @@ if ($_GET['action'] === "savetexture"){
 	$array = array('NAME' => $_GET['n'],
 				   'TYPE' => $_GET['t'], 
 				   'IMG' => $_GET['img'],
+				   'TEXTURE_REPAIRX' => 10,
+				   'TEXTURE_REPAIRY' => 10,
 				   'matrialoptions' => $materilaoption);
 
 	$res = TFile::saveFile($path,$name, json_encode($array),'mat');
