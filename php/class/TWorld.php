@@ -8,8 +8,8 @@ class TWorld {
 		while($c--){
 			$files[$floder[$c]]['T'] = TFile::getFileToFloder('/world/'.$floder[$c].'/v');
 		}
-		print_r($files);
-		exit();
+		return $files;
+
 	}
 	static function _getQuard($x,$z){
 		$name = ~~($x / 1000).'='.~~($z / 1000);
