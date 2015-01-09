@@ -6,7 +6,23 @@ class TWorld {
 		$c = count($floder);
 		$files  = array();
 		while($c--){
-			$files[$floder[$c]]['T'] = TFile::getFileToFloder('/world/'.$floder[$c].'/v');
+			$tr = TFile::getFileToFloder('/world/'.$floder[$c].'/v/');
+			if ($tr != ''){
+				foreach($tr as $file){
+					if ($file !== ''){
+						$fil = $_SERVER['DOCUMENT_ROOT'].$file;
+						//die($fil);
+						$dat = file_get_contents($fil);
+						$data = (array)json_decode($dat);
+			
+						$URL = $_SERVER['DOCUMENT_ROOT'].$data['option']->materialURL;
+						//die($URL);
+						$material = (array)json_decode(file_get_contents($URL));
+						$terrian =  array('G'=>$data,'M'=>$material);
+						$files[$floder[$c]]['T'][] = $terrian;
+					}
+				}				
+			}
 		}
 		return $files;
 
