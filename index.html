@@ -90,7 +90,7 @@ void main()
 		<div id="container"></div>
 		<script>
 
-		window.CUBSTEP = 1000;
+		window.CUBSTEP =2000;
 		window.FORMS = {};
 
 		function smooth(_a,_b,_s){
@@ -110,7 +110,7 @@ void main()
 
 			function init() {
 
-				var planeGeo = new THREE.PlaneGeometry( 1000, 1000);	
+				var planeGeo = new THREE.PlaneGeometry( 2000, 2000);	
 				planeGeo.applyMatrix( new THREE.Matrix4().makeRotationX( - Math.PI / 2 ) );
 				var material =  new THREE.MeshBasicMaterial( { color: 0xF00000,wireframe:true, wireframeLinewidth:9 } );
 				window.planes = new THREE.Mesh( planeGeo, material );
