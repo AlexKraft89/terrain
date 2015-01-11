@@ -28,7 +28,7 @@ class TWorld {
 
 	}
 	static function _getQuard($x,$z){
-		$name = ~~($x / 1000).'='.~~($z / 1000);
+		$name = ~~($x / 2000).'='.~~($z / 2000);
 		$flodername =  '/world/'.$name;
 	    if (TFile::floderExist($flodername)){
 	    	return $name;
