@@ -68,7 +68,16 @@ class TWorld {
 			die('not floder or not ctreat');
 		}
 
-		if (TFile::saveFile('/world/'.$nameFloder.'/v/','t-'.$name.'-'.$x.'-'.$z,$array,'map')){
+		if (TFile::saveFile('/world/'.$nameFloder.'/v/','t-'.$name,$array,'map')){
+			echo('true');
+		} else {
+			echo('false');
+		}
+	}
+
+	static function Savemodel($array,$x,$z,$n,$file){
+		//die($file);
+		if (TFile::saveFile($file,'',$array,'model')){
 			echo('true');
 		} else {
 			echo('false');

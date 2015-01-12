@@ -14,7 +14,7 @@ class TFile {
 	}
 	static function getFileToFloder($path){
 		//die($path);
-		$array =array();
+		$array = array();
 		$floder = $_SERVER['DOCUMENT_ROOT'].$path;
 		//echo($floder);
 		if (file_exists($floder)){
