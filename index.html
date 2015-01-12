@@ -31,8 +31,13 @@
 		</style>
 
 		<link rel="stylesheet" href="/style.css">
+
+		<script src="/lib/loadermodel.js"></script>
+
 		<script src="/lib/three.min.js"></script>
+		<script src="/lib/worldloader.js"></script>
 		<script src="/lib/map.js"></script>
+		<script src="/lib/label.js"></script>
 		<script src="/lib/OrbitControls.js"></script>
 		<script src="/lib/jquery-2.0.0.min.js"></script>
 		<script src="/lib/dnd.js"></script>
@@ -124,6 +129,8 @@ void main()
 				//controls.addEventListener( 'change', render );
 
 				scene = new THREE.Scene();
+
+				Game = {'scene':scene};
 				//scene.fog = new THREE.FogExp2( 0xcccccc, 0.002 );
 
 				// world

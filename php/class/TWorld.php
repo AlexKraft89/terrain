@@ -1,29 +1,53 @@
 <?php
 class TWorld {
 
+	protected function _getV($floder){
+		$list = array();
+			if ($floder != ''){
+				foreach($floder as $file){
+					if ($file !== ''){
+						$fil = $_SERVER['DOCUMENT_ROOT'].$file;
+						$dat = file_get_contents($fil);
+						$data = (array)json_decode($dat);
+						$URL = $_SERVER['DOCUMENT_ROOT'].$data['option']->materialURL;
+						$material = (array)json_decode(file_get_contents($URL));
+						$terrian =  array('G'=>$data,'M'=>$material);
+						$list[] = $terrian;
+					}
+				}				
+			}
+		return $list;
+	}
+	protected function _getM($floder){
+		$list = array();
+			if ($floder != ''){
+				foreach($floder as $file){
+					if ($file !== ''){
+						$fil = $_SERVER['DOCUMENT_ROOT'].$file;
+						$dat = file_get_contents($fil);
+						$list[] = (array)json_decode($dat);
+					}
+
+				}
+			}
+		return $list;
+	}
+
 	static function getMap($array){
 		$floder = json_decode($array);
 		$c = count($floder);
 		$files  = array();
 		while($c--){
-			$tr = TFile::getFileToFloder('/world/'.$floder[$c].'/v/');
-			if ($tr != ''){
-				foreach($tr as $file){
-					if ($file !== ''){
-						$fil = $_SERVER['DOCUMENT_ROOT'].$file;
-						//die($fil);
-						$dat = file_get_contents($fil);
-						$data = (array)json_decode($dat);
-			
-						$URL = $_SERVER['DOCUMENT_ROOT'].$data['option']->materialURL;
-						//die($URL);
-						$material = (array)json_decode(file_get_contents($URL));
-						$terrian =  array('G'=>$data,'M'=>$material);
-						$files[$floder[$c]]['T'][] = $terrian;
-					}
-				}				
-			}
+
+			$files[$floder[$c]]['T'] = TWorld::_getV( TFile::getFileToFloder('/world/'.$floder[$c].'/v/')  );
+			$files[$floder[$c]]['M'] = TWorld::_getM( TFile::getFileToFloder('/world/'.$floder[$c].'/m/')  );
+
+
+
+
 		}
+
+
 		return $files;
 
 	}
