@@ -38,13 +38,14 @@
 		<script src="/lib/worldloader.js"></script>
 		<script src="/lib/map.js"></script>
 		<script src="/lib/label.js"></script>
-		<script src="/lib/OrbitControls.js"></script>
+		<script src="/lib/PointerLockControls.js"></script>
 		<script src="/lib/jquery-2.0.0.min.js"></script>
 		<script src="/lib/dnd.js"></script>
 		<script src="/lib/modul.js"></script>
 		<script src="/lib/keyboard.js"></script>
 		<script src="/lib/gui.js"></script>
 		<script src="/lib/dat.gui.js"></script>
+		<script src="/lib/TransformControls.js"></script>
 
 
 
@@ -119,18 +120,27 @@ void main()
 				planeGeo.applyMatrix( new THREE.Matrix4().makeRotationX( - Math.PI / 2 ) );
 				var material =  new THREE.MeshBasicMaterial( { color: 0xF00000,wireframe:true, wireframeLinewidth:9 } );
 				window.planes = new THREE.Mesh( planeGeo, material );
-
+				scene = new THREE.Scene();
 				camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 10000 );
-				camera.position.z = 500;
+				//camera.position.z = 500;
 				camera.cubID = 99999 + '-' + 9999;
 
-				controls = new THREE.OrbitControls( camera );
-				controls.damping = 0.2;
+			
 				//controls.addEventListener( 'change', render );
 
-				scene = new THREE.Scene();
+					controls = new THREE.PointerLockControls( camera );
+				scene.add( controls.getObject() );
 
 				Game = {'scene':scene};
+
+				// Game.controlOb = new THREE.TransformControls( this.camera, renderer.domElement );		
+	   // 			Game.controlOb.e = false;  
+
+				// Game.controlOb.e  = true;
+				// Game.controlOb.attach( Obj );
+				// Game.scene.add( Game.controlOb );
+
+
 				//scene.fog = new THREE.FogExp2( 0xcccccc, 0.002 );
 
 				// world
@@ -181,13 +191,13 @@ void main()
 
 				WORLD = new World();
 
-				
+				$('body').on('contextmenu',function(e){ e.preventDefault(); e.stopPropagation(); return false;});
 
 				//
 
-				window.addEventListener( 'resize', onWindowResize, false );
+				//window.addEventListener( 'resize', onWindowResize, false );
 
-
+controls.enabled = true;
 				animate();
 
 			}
@@ -208,7 +218,6 @@ void main()
 				requestAnimationFrame(animate);
 				controls.update();
 				renderer.render( scene, camera );
-				drewcude(camera);
 			}
 
 
@@ -221,7 +230,9 @@ void main()
 
 /////////////////////////////////////////////////
 
-	
+	setInterval(function(){
+		drewcude(controls.getObject());
+	},2000);
 
 ////////////////////////////////////////////////////////////////////////////
 
@@ -229,6 +240,7 @@ MODUL.load("stamping");
 MODUL.load("elementcreator");
 MODUL.load("materialliberu");
 MODUL.load("loader");
+MODUL.load("transform");
 
 // REDAKTOR = {
 
@@ -281,4 +293,3 @@ GUI.sceneObjectPanel.refresh(scene);
 
 	</style>
 </html>
-
