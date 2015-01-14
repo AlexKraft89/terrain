@@ -25,7 +25,9 @@ class TWorld {
 					if ($file !== ''){
 						$fil = $_SERVER['DOCUMENT_ROOT'].$file;
 						$dat = file_get_contents($fil);
-						$list[] = (array)json_decode($dat);
+						$ar = (array)json_decode($dat);
+						$ar['file'] = explode('.',$file)[0];
+						$list[] = $ar;
 					}
 
 				}
