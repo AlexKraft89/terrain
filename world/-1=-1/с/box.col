@@ -1,0 +1,12 @@
+{
+"name":"Куб дуб",
+"height":100,
+"width":100,
+"depth":100,
+"heightSegments":100,
+"widthSegments":100,
+"depthSegments":100,
+"position":{"x":0,"y":0,"z":0},
+"rotation":{"x":0,"y":0,"z":0},
+"scale":{"x":1,"y":1,"z":1}
+}

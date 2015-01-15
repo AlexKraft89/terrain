@@ -43,7 +43,7 @@ class TWorld {
 
 			$files[$floder[$c]]['T'] = TWorld::_getV( TFile::getFileToFloder('/world/'.$floder[$c].'/v/')  );
 			$files[$floder[$c]]['M'] = TWorld::_getM( TFile::getFileToFloder('/world/'.$floder[$c].'/m/')  );
-
+			$files[$floder[$c]]['C'] = TWorld::_getM( TFile::getFileToFloder('/world/'.$floder[$c].'/c/')  );
 
 
 
@@ -65,12 +65,7 @@ class TWorld {
 	}
 	static function saveTerrain($array,$x,$z,$n){
 		$name = TString::translite($n);
-		$nameFloder = TWorld::_getQuard($x,$z);
-		if (!$nameFloder){
-			die('not floder or not ctreat');
-		}
-
-		if (TFile::saveFile('/world/'.$nameFloder.'/v/','t-'.$name,$array,'map')){
+		if (TFile::saveFile('/world/'.$x.'='.$z.'/v/','t-'.$name,$array,'map')){
 			echo('true');
 		} else {
 			echo('false');
