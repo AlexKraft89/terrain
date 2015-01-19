@@ -61,17 +61,20 @@ void main()
 
 <!-- fragment shader a.k.a. pixel shader -->
 <script id="fragmentShader" type="x-shader/x-vertex"> 
+uniform sampler2D o;
 uniform sampler2D t1;
 uniform sampler2D t2;
 uniform sampler2D t3;
 varying vec2 vUV;
 varying vec4 blend;
 
+
+
 void main() 
 {
-	gl_FragColor =   texture2D(t1,  vUV * 10.0 ) * blend.r + 
-	                 texture2D(t2,  vUV * 10.0 ) * blend.g + 
-	                 texture2D(t3,  vUV * 10.0 ) * blend.b;
+	gl_FragColor = texture2D(t1,  vUV * 10.0 ) * blend.r +
+	               texture2D(t2,  vUV * 10.0 ) * blend.g + 
+	               texture2D(t3,  vUV * 10.0 ) * blend.b ;
 }  
 </script>
 
@@ -130,11 +133,13 @@ void main()
 
 
 
-	var bumpTexture = new THREE.ImageUtils.loadTexture( 'images/heightmap.png' );
+	var bumpTexture = new THREE.ImageUtils.loadTexture( 'images/heightmap.bmp' );
 	bumpTexture.wrapS = bumpTexture.wrapT = THREE.RepeatWrapping; 
 
+	var o = new THREE.ImageUtils.loadTexture( 'images/sand-512.jpg' );
+	o.wrapS = o.wrapT = THREE.RepeatWrapping; 
 
-	var tt1 = new THREE.ImageUtils.loadTexture( 'images/sand-512.jpg' );
+	var tt1 = new THREE.ImageUtils.loadTexture( 'images/dirt-512.jpg' );
 	tt1.wrapS = tt1.wrapT = THREE.RepeatWrapping; 
 	
 	var tt2 = new THREE.ImageUtils.loadTexture( 'images/grass-512.jpg' );
@@ -145,6 +150,8 @@ void main()
 	
 	var customUniforms = {
 		bumpTexture1:	{ type: "t", value: bumpTexture },
+
+		o:	{ type: "t", value: o },
 		t1:	{ type: "t", value: tt1 },
 		t2:	{ type: "t", value: tt2 },
 		t3:	{ type: "t", value: tt3 }
@@ -158,7 +165,7 @@ void main()
 		side: THREE.DoubleSide
 	}   );
 		
-	var planeGeo = new THREE.PlaneGeometry( 5000, 5000, 500, 500 );
+	var planeGeo = new THREE.PlaneGeometry( 2000, 2000, 100, 100 );
 	var plane = new THREE.Mesh(	planeGeo, customMaterial );
 	plane.rotation.x = -Math.PI / 2;
 	plane.position.y = -100;
