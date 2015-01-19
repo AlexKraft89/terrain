@@ -1,0 +1,65 @@
+<style>
+.creatmodels {
+	position: absolute;
+width: 1000px;
+height: 630px;
+top: 10%;
+background-color: #000;
+border: 1px solid #424242;
+left: 50%;
+margin-left: -500px;
+color: #fff;
+}
+
+.creatmodels > .header {
+	background: #45484D;
+background: -moz-linear-gradient(top, #45484d 0%, #000000 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#45484D), color-stop(100%,#000));
+background: -webkit-linear-gradient(top, #45484D 0%,#000 100%);
+background: -o-linear-gradient(top, #45484d 0%,#000000 100%);
+background: -ms-linear-gradient(top, #45484d 0%,#000000 100%);
+background: linear-gradient(to bottom, #45484D 0%,#000 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=0 );
+height: 20px;
+font-size: 15px;
+text-align: center;
+cursor: pointer;
+	
+}
+
+.creatmodels > .body {
+	width: 1000px;
+height: 587px;
+overflow-y: scroll;
+}
+.creatmodels > .butbody {}
+.creatmodels > .button {}
+
+
+.creatmodels > .body > .modelitem {
+	width: 150px;
+	height: 200px;
+	overflow: hidden;
+	float: left;
+	border: 1px solid #353535;
+	padding: 5px;
+	margin: 10px;
+}
+
+.creatmodels > .body > .modelitem > img { 
+	width: 150px;
+}
+
+</style>
+
+<div class="creatmodels">
+	<div class="header">Создать ландшафт</div>
+	<div class="body" id="modelbodys">
+
+	</div>
+
+	<div class="butbody">
+			<div class="button" id="savenewlandscape">Сохранить</div>
+			<div class="button" onclick="MODUL.stop('elementcreator');">Закрыть</div>
+	</div>
+</div>

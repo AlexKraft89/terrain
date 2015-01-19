@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>three.js webgl - orbit controls</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+			body {
+				color: #000;
+				font-family:Monospace;
+				font-size:13px;
+			
+				
+
+				background-color: #fff;
+				margin: 0px;
+						overflow: hidden;
+			}
+
+			#info {
+				color:#000;
+				position: absolute;
+				top: 0px; width: 100%;
+				padding: 5px;
+
+			}
+
+			a {
+				color: red;
+			}
+		</style>
+
+		<link rel="stylesheet" href="/style.css">
+
+
+		<script src="/lib/three.min.js"></script>
+		
+		<script src="/lib/PointerLockControls.js"></script>
+		<script src="/lib/jquery-2.0.0.min.js"></script>
+		
+		<script src="/lib/keyboard.js"></script>
+	
+		<script src="/lib/dat.gui.js"></script>
+
+
+
+
+<script id="vertexShader" type="x-shader/x-vertex">
+uniform sampler2D bumpTexture1;
+varying vec4 blend;
+varying vec2 vUV;
+
+void main() 
+{ 
+	vUV = uv;
+	blend = texture2D( bumpTexture1, uv );
+	gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+
+}
+</script>
+
+<!-- fragment shader a.k.a. pixel shader -->
+<script id="fragmentShader" type="x-shader/x-vertex"> 
+uniform sampler2D t1;
+uniform sampler2D t2;
+uniform sampler2D t3;
+varying vec2 vUV;
+varying vec4 blend;
+
+void main() 
+{
+	gl_FragColor =   texture2D(t1,  vUV * 10.0 ) * blend.r + 
+	                 texture2D(t2,  vUV * 10.0 ) * blend.g + 
+	                 texture2D(t3,  vUV * 10.0 ) * blend.b;
+}  
+</script>
+
+
+
+
+
+	</head>
+
+	<body>
+		<div id="container"></div>
+		<script>
+
+		window.CUBSTEP =2000;
+		window.FORMS = {};
+
+		function smooth(_a,_b,_s){
+			var  t = _s * _s * (3.0 - 2.0 * _s);
+			return (_a * (1.0 - t)) + (_b * t);
+		}
+		var customUniforms
+			window.movecamera = false;
+ 			window.keyboard = new THREEx.KeyboardState();
+			var container, stats;
+
+			var camera, controls, scene, renderer;
+
+			init();
+			//render();
+
+
+			function init() {
+
+				var planeGeo = new THREE.PlaneGeometry( 2000, 2000);	
+				planeGeo.applyMatrix( new THREE.Matrix4().makeRotationX( - Math.PI / 2 ) );
+				var material =  new THREE.MeshBasicMaterial( { color: 0xF00000,wireframe:true, wireframeLinewidth:9 } );
+				window.planes = new THREE.Mesh( planeGeo, material );
+				scene = new THREE.Scene();
+				camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 10000 );
+				//camera.position.z = 500;
+				camera.cubID = 99999 + '-' + 9999;
+
+			
+				//controls.addEventListener( 'change', render );
+
+					controls = new THREE.PointerLockControls( camera );
+				scene.add( controls.getObject() );
+
+				Game = {'scene':scene,col:true};
+
+
+
+
+
+
+
+
+
+	var bumpTexture = new THREE.ImageUtils.loadTexture( 'images/heightmap.png' );
+	bumpTexture.wrapS = bumpTexture.wrapT = THREE.RepeatWrapping; 
+
+
+	var tt1 = new THREE.ImageUtils.loadTexture( 'images/sand-512.jpg' );
+	tt1.wrapS = tt1.wrapT = THREE.RepeatWrapping; 
+	
+	var tt2 = new THREE.ImageUtils.loadTexture( 'images/grass-512.jpg' );
+	tt2.wrapS = tt2.wrapT = THREE.RepeatWrapping; 
+	
+	var tt3 = new THREE.ImageUtils.loadTexture( 'images/rock-512.jpg' );
+	tt3.wrapS = tt3.wrapT = THREE.RepeatWrapping; 
+	
+	var customUniforms = {
+		bumpTexture1:	{ type: "t", value: bumpTexture },
+		t1:	{ type: "t", value: tt1 },
+		t2:	{ type: "t", value: tt2 },
+		t3:	{ type: "t", value: tt3 }
+	};
+	
+	var customMaterial = new THREE.ShaderMaterial( 
+	{
+	    uniforms: customUniforms,
+		vertexShader:   document.getElementById( 'vertexShader'   ).textContent,
+		fragmentShader: document.getElementById( 'fragmentShader' ).textContent,
+		side: THREE.DoubleSide
+	}   );
+		
+	var planeGeo = new THREE.PlaneGeometry( 5000, 5000, 500, 500 );
+	var plane = new THREE.Mesh(	planeGeo, customMaterial );
+	plane.rotation.x = -Math.PI / 2;
+	plane.position.y = -100;
+	scene.add( plane );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				// renderer
+
+				renderer = new THREE.WebGLRenderer( { antialias: true } );
+				renderer.setClearColor( 0xcccccc, 1 );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+				renderer.shadowMapType = THREE.PCFSoftShadowMap;
+				renderer.shadowMapEnabled = true;
+				//renderer.shadowMapCullFace = THREE.CullFaceBack;
+				//renderer.physicallyBasedShading = true;  
+
+				container = document.getElementById( 'container' );
+				container.appendChild( renderer.domElement );
+
+				//WORLD = new World();
+
+				$('body').on('contextmenu',function(e){ e.preventDefault(); e.stopPropagation(); return false;});
+
+				//
+
+				//window.addEventListener( 'resize', onWindowResize, false );
+
+controls.enabled = true;
+				animate();
+
+			}
+
+			function onWindowResize() {
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+				render();
+
+			}
+
+			function animate() {
+
+				requestAnimationFrame(animate);
+				controls.update();
+				renderer.render( scene, camera );
+			}
+
+
+			// function render() {
+
+			// 	renderer.render( scene, camera );
+				
+
+			// }
+
+/////////////////////////////////////////////////
+
+
+////////////////////////////////////////////////////////////////////////////
+
+// REDAKTOR = {
+
+// 	"ShowVertexPanel":function(){
+// 		MODUL.stopAll();
+// 		MODUL.start("stamping");
+// 	},
+// 	"ShowCreatPanel":function(){
+// 		MODUL.stopAll();
+// 		MODUL.start("elementcreator");
+
+// 	}
+
+
+
+// 	}
+
+
+		</script>
+
+
+
+
+
+	</body>
+
+	<style type="text/css">
+
+	</style>
+</html>

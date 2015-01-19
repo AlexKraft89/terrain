@@ -1,5 +1,6 @@
 <?
 class TFile {
+	var  $list = array();
 	static function floderExist($path){
 		$floder = $_SERVER['DOCUMENT_ROOT'].$path;
 		if (file_exists($floder)){
