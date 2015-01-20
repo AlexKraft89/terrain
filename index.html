@@ -48,7 +48,6 @@
 		<script src="/lib/TransformControls.js"></script>
 
 
-
 <script id="vertexShader" type="x-shader/x-vertex">
 uniform sampler2D bumpTexture1;
 varying vec4 blend;
@@ -71,11 +70,13 @@ uniform sampler2D t3;
 varying vec2 vUV;
 varying vec4 blend;
 
+
+
 void main() 
 {
-	gl_FragColor =   texture2D(t1,  vUV * 10.0 ) * blend.r + 
-	                 texture2D(t2,  vUV * 10.0 ) * blend.g + 
-	                 texture2D(t3,  vUV * 10.0 ) * blend.b;
+	gl_FragColor = texture2D(t1,  vUV * 10.0 ) * blend.r +
+	               texture2D(t2,  vUV * 10.0 ) * blend.g + 
+	               texture2D(t3,  vUV * 10.0 ) * blend.b ;
 }  
 </script>
 

@@ -61,7 +61,6 @@ void main()
 
 <!-- fragment shader a.k.a. pixel shader -->
 <script id="fragmentShader" type="x-shader/x-vertex"> 
-uniform sampler2D o;
 uniform sampler2D t1;
 uniform sampler2D t2;
 uniform sampler2D t3;
@@ -125,19 +124,8 @@ void main()
 
 				Game = {'scene':scene,col:true};
 
-
-
-
-
-
-
-
-
-	var bumpTexture = new THREE.ImageUtils.loadTexture( 'images/heightmap.bmp' );
+	var bumpTexture = new THREE.ImageUtils.loadTexture( 'images/heightmap.jpg' );
 	bumpTexture.wrapS = bumpTexture.wrapT = THREE.RepeatWrapping; 
-
-	var o = new THREE.ImageUtils.loadTexture( 'images/sand-512.jpg' );
-	o.wrapS = o.wrapT = THREE.RepeatWrapping; 
 
 	var tt1 = new THREE.ImageUtils.loadTexture( 'images/dirt-512.jpg' );
 	tt1.wrapS = tt1.wrapT = THREE.RepeatWrapping; 
@@ -149,13 +137,11 @@ void main()
 	tt3.wrapS = tt3.wrapT = THREE.RepeatWrapping; 
 	
 	var customUniforms = {
-		bumpTexture1:	{ type: "t", value: bumpTexture },
-
-		o:	{ type: "t", value: o },
-		t1:	{ type: "t", value: tt1 },
-		t2:	{ type: "t", value: tt2 },
-		t3:	{ type: "t", value: tt3 }
-	};
+							bumpTexture1:	{ type: "t", value: bumpTexture },
+							t1:	{ type: "t", value: tt1 },
+							t2:	{ type: "t", value: tt2 },
+							t3:	{ type: "t", value: tt3 }
+						};
 	
 	var customMaterial = new THREE.ShaderMaterial( 
 	{
