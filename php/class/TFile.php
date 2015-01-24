@@ -13,7 +13,7 @@ class TFile {
 			}
 		}
 	}
-	static function getFileToFloder($path){
+	static function getFileToFloder($path,$ar = false){
 		//die($path);
 		$array = array();
 		$floder = $_SERVER['DOCUMENT_ROOT'].$path;
@@ -22,7 +22,11 @@ class TFile {
 			if ($handle = opendir($floder)) {
 			    while (false !== ($file = readdir($handle))) { 
 			    	if ($file !== '.' && $file !== '..'){
-			        	array_push($array, $path.$file);
+			    		if ($ar === false){
+			        		array_push($array, $path.$file);
+			        	} else {
+			        		array_push($array, array('PATH' => $path, 'FILE' => $file));
+			        	}
 			    	}
 			    }
 			    closedir($handle); 
@@ -31,6 +35,11 @@ class TFile {
 		}
 	}
 	static function saveFile($path,$name,$data,$r = 'x'){
+
+		if (!file_exists($_SERVER['DOCUMENT_ROOT'].$path) && $name != '' ){
+			mkdir($_SERVER['DOCUMENT_ROOT'].$path, 0777, true);
+		}
+
 		if (file_put_contents($_SERVER['DOCUMENT_ROOT'].$path.$name.'.'.$r, $data)){
 			return true;
 		} else {

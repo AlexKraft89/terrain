@@ -1,0 +1,32 @@
+{
+    "NAME": "Пустыня шейдер",
+    "TYPE": "ShaderMaterial",
+    "IMG": "/resource/texture/1.jpg",
+    "bumpTexture":"/resource/hm/0=0/heightmap.jpg",
+    "tt1":"/resource/texture/sand-512.jpg",
+    "tt2":"/resource/texture/rock-512.jpg",
+    "tt3":"/resource/texture/dirt-512.jpg",
+    "TEXTURE_REPAIRX": 1,
+    "TEXTURE_REPAIRY": 1,
+    "matrialoptions": {
+        "alphaTest": 0,
+        "blendDst": 205,
+        "blendEquation": 100,
+        "blendSrc": 204,
+        "blending": 1,
+        "combine": 0,
+        "depthTest": true,
+        "depthWrite": true,
+        "fog": true,
+        "morphTargets": false,
+        "name": "Пустыня",
+        "opacity": 1,
+        "overdraw": 0,
+        "shading": 2,
+        "side": 0,
+        "skinning": false,
+        "transparent": false,
+        "visible": true,
+        "wireframe": false
+    }
+}
