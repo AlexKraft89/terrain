@@ -92,7 +92,7 @@ void main()
 
 		window.CUBSTEP =2000;
 		window.FORMS = {};
-
+		var clock = new THREE.Clock();
 		function smooth(_a,_b,_s){
 			var  t = _s * _s * (3.0 - 2.0 * _s);
 			return (_a * (1.0 - t)) + (_b * t);
@@ -164,10 +164,11 @@ controls.enabled = true;
 			}
 
 			function animate() {
-
+				var delta = clock.getDelta();  
 				requestAnimationFrame(animate);
 				controls.update();
 				renderer.render( scene, camera );
+				THREE.AnimationHandler.update(delta);
 			}
 
 
