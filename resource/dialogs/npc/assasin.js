@@ -6,7 +6,7 @@ dialog = {
 						{"answer":"Иди нахуй тебя это не должно волновать","fun":function(){}},
 						{"answer":"До свиданья шенок","fun":function(){ GUI.dialog.openstep('step2'); }},
 						{"answer":"Задания","fun":function(){ GUI.quest.GetCityQuest(5);  GUI.dialog.closedialog();},"color":"#F00"},
-						{"answer":"Магазин","fun":function(){ GUI.sale.StartSaleFormBasicShop();  GUI.dialog.closedialog(); },"color":"#F00"}
+						{"answer":"Магазин","fun":function(){ GUI.sale.StartSaleFormBasicShop();  GUI.dialog.closedialog(); },"color":"#FF0"}
 						
 					 ]
 			},
